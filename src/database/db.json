@@ -1,0 +1,10 @@
+{
+    "Bank":[{
+     "bankName":"HDFC",
+     "baseCurrency":"INR",
+     "amount":23,
+     "targetCurrency":"RUB", 
+     "rateOfTargetCurrency":"70", 
+     "totalAmount":"1500"   
+    }]
+}
