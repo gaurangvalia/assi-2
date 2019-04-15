@@ -9,24 +9,27 @@ import { BankInfo, convertData } from '../model/bank-info.model';
 export class BankInfoService {
 
   /** Base url of bank info service */
-  public baseUrl:string ='http://localhost:3000';
-  constructor(private http: HttpClient) { 
+  public baseUrl: string = 'http://localhost:3000';
+  constructor(private http: HttpClient) {
   }
   /**
    * get The converted data base on baseCurrency value and targetCurrency value 
    */
-  public getConvertedPrice(baseCurrency:string, targertCurrency:string): Observable<convertData>{
-    return this.http.get<convertData>('https://free.currencyconverterapi.com/api/v6/convert?q='+
-    baseCurrency+'_'+targertCurrency+'&compact=ultra&apiKey=3560f10ff71a8a75abbb');
+  public getConvertedPrice(baseCurrency: string, targertCurrency: string): Observable<convertData> {
+    return this.http.get<convertData>('https://free.currencyconverterapi.com/api/v6/convert?q=' +
+      baseCurrency + '_' + targertCurrency + '&compact=ultra&apiKey=3560f10ff71a8a75abbb');
   }
-  
+
   /**
    * Adds bank record
    * @param bankInfo : add model
    * @returns bank record 
    */
-  public addBankRecord(bankInfo: BankInfo) :Observable<BankInfo> {
-    return this.http.post<BankInfo>(this.baseUrl,bankInfo);
+  public addBankRecord(bankInfo: BankInfo): Observable<BankInfo> {
+    return this.http.post<BankInfo>(this.baseUrl, bankInfo);
   }
-  
+
+  public getUserBankDataLists(): Observable<BankInfo[]> {
+    return this.http.get<BankInfo[]>(this.baseUrl + '/bank');
+  }
 }

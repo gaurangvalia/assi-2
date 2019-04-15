@@ -15,36 +15,38 @@ export class CurrencyConvertFormComponent implements OnInit {
   /** Bank is a type of bankinfo array */
   public bank: BankInfo[];
   /** Base currency item of currency convert form component */
-  public baseCurrencyItem:string;
+  public baseCurrencyItem: string;
   /** target currency item store here */
-  public targetCurrencyItem:string;
+  public targetCurrencyItem: string;
   /** Convert price of currency convert form component */
-  public convertPrice:string;
+  public convertPrice: string;
 
-  constructor(private fb:FormBuilder,private bankService:BankInfoService) { }
+  constructor(private fb: FormBuilder, private bankService: BankInfoService) { }
 
   /** on init is frist call */
-  public ngOnInit() : void {
-   
-    this.bankInfoFormGroup=this.fb.group({
-      bankName:[''],
-      baseCurrency:[''],
-      amount:[''],
-      targerCurrency:['']
+  public ngOnInit(): void {
+
+    this.bankInfoFormGroup = this.fb.group({
+      bankName: [''],
+      baseCurrency: [''],
+      amount: [''],
+      targerCurrency: ['']
     });
   }
 
-  /** Adds bank info add the Information to server */
-  public getDataByFormGroup(): void{
-    console.log('value',this.bankInfoFormGroup.value);       
-    this.baseCurrencyItem=this.bankInfoFormGroup.controls.baseCurrency.value;
-    this.targetCurrencyItem=this.bankInfoFormGroup.controls.targerCurrency.value;
-    console.log('bi->',this.baseCurrencyItem);
-    console.log('ti->',this.targetCurrencyItem);
-    this.bankService.getConvertedPrice(this.baseCurrencyItem,this.targetCurrencyItem).subscribe((res: convertData)=>{
+  public getDataByFormGroup(): void {
+    console.log('value', this.bankInfoFormGroup.value);
+    this.baseCurrencyItem = this.bankInfoFormGroup.controls.baseCurrency.value;
+    this.targetCurrencyItem = this.bankInfoFormGroup.controls.targerCurrency.value;
+    console.log('bi->', this.baseCurrencyItem);
+    console.log('ti->', this.targetCurrencyItem);
+    this.bankService.getConvertedPrice(this.baseCurrencyItem, this.targetCurrencyItem).subscribe((res: convertData) => {
       console.log(res);
-      this.convertPrice = res.price;
-      console.log('res',this.convertPrice);
+      this.convertPrice = res[this.baseCurrencyItem + '_' + this.targetCurrencyItem];
+      this.bankInfoFormGroup.controls.amount.value;
+
+
+
     });
     // this.addBankInfo();
   }

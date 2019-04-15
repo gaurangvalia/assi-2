@@ -5,19 +5,20 @@ import { CurrencyConvertFormComponent } from './currency-convert-form/currency-c
 import { CurrencyCardListComponent } from './currency-card-list/currency-card-list.component';
 
 const routes: Routes = [
-   {
-    path:'',
-    component: BankInfoComponent
-   },
-   {
-    path:'currency-convert-from',
-    component: CurrencyConvertFormComponent
-   },
-   {
-    path:'currency-card-list',
-    component: CurrencyCardListComponent
-   }
-];
+  {
+    path: '',
+    component: BankInfoComponent,
+    children: [
+      {
+        path: 'currency-convert-from',
+        component: CurrencyConvertFormComponent
+      },
+      {
+        path: 'currency-card-list',
+        component: CurrencyCardListComponent
+      }
+    ]
+  }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

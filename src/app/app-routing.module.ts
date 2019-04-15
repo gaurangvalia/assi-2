@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'bank-info',
-    loadChildren:'./bank-info/bank-info.module#BankInfoModule'
+    path: 'bank-info',
+    loadChildren: './bank-info/bank-info.module#BankInfoModule'
   }
 ];
 
